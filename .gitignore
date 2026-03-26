@@ -1,0 +1,43 @@
+# Entorno virtual
+.venv/
+venv/
+env/
+
+# Variables de entorno (NUNCA subir al repo)
+.env
+
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.so
+*.egg
+*.egg-info/
+dist/
+build/
+.eggs/
+
+# Django
+*.log
+db.sqlite3
+media/
+staticfiles/
+static_collected/
+
+# Testing
+.coverage
+.pytest_cache/
+htmlcov/
+
+# IDEs
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# macOS
+.DS_Store
+
+# Claude Code
+.claude/

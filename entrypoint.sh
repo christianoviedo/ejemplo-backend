@@ -2,20 +2,26 @@
 set -e
 
 echo "⏳ Esperando base de datos..."
-until python -c "
+until python3 -c "
 import os, psycopg2, dj_database_url
 conf = dj_database_url.config(default=os.environ['DATABASE_URL'])
-psycopg2.connect(**{k: conf[k] for k in ('dbname','user','password','host','port') if k in conf})
+psycopg2.connect(
+    dbname=conf['NAME'],
+    user=conf['USER'],
+    password=conf['PASSWORD'],
+    host=conf['HOST'],
+    port=conf.get('PORT', 5432),
+)
 " 2>/dev/null; do
   sleep 1
 done
 echo "✓ Base de datos disponible"
 
 echo "⏳ Aplicando migraciones..."
-python manage.py migrate --noinput
+python3 manage.py migrate --noinput
 
 echo "⏳ Recolectando archivos estáticos..."
-python manage.py collectstatic --noinput
+python3 manage.py collectstatic --noinput
 
 echo "🚀 Iniciando Gunicorn..."
 exec gunicorn bodega.wsgi:application \

@@ -25,6 +25,9 @@ media/
 staticfiles/
 static_collected/
 
+# Docker
+.env.production
+
 # Testing
 .coverage
 .pytest_cache/
